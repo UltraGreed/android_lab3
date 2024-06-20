@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidlab3.domain.AutoEntity
 import com.example.androidlab3.R
 
-class AutoRecyclerAdapter (private val onItemClick: (id: Int) -> Unit):
+class AutoRecyclerAdapter(private val onItemClick: (id: Int) -> Unit) :
     ListAdapter<AutoEntity, AutoRecyclerAdapter.AutoViewHolder>(AutoDiffUtil()) {
 
-    private lateinit var originalList: List<AutoEntity>
+    private var originalList: List<AutoEntity> = listOf()
     private var filterModelQuery: String? = null
     private var filterFuelQuery: String? = null
 
@@ -46,15 +47,15 @@ class AutoRecyclerAdapter (private val onItemClick: (id: Int) -> Unit):
         holder.powerTextView.text = "${auto.powerCapacity} л.с."
 
         val fuelColorMap = mapOf(
-            "Бензин" to R.color.green,
-            "Дизель" to R.color.red,
-            "Электро" to R.color.brown,
-            "Гибрид" to R.color.gray,
+            "Бензин" to "#FF9900".toColorInt(),
+            "Дизель" to "#FF0000".toColorInt(),
+            "Электро" to "#00FF2A".toColorInt(),
+            "Гибрид" to "#464646".toColorInt(),
         )
 
         holder.cardView.setCardBackgroundColor(fuelColorMap[auto.fuelType]!!)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onItemClick(auto.id)
             Log.d("test", auto.id.toString())
         }
@@ -74,14 +75,14 @@ class AutoRecyclerAdapter (private val onItemClick: (id: Int) -> Unit):
         filter()
     }
 
-    private fun filter(){
+    private fun filter() {
         var filteredList = originalList.toList()
         if (filterModelQuery != null) {
             filteredList = filteredList.filter { it.modelName.lowercase().contains(filterModelQuery!!.lowercase()) }
         }
 
         if (filterFuelQuery != null) {
-            filteredList = filteredList.filter { it.fuelType == filterFuelQuery}
+            filteredList = filteredList.filter { it.fuelType == filterFuelQuery }
         }
 
         submitList(filteredList)
