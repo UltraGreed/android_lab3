@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lab1</string>
+    <string name="app_name">lab3</string>
 
     <string name="toyota_crown">Toyota Crown</string>
     <string name="toyota_mark2">Toyota Mark II</string>
@@ -11,4 +11,14 @@
     <string name="diesel">дизель</string>
     <string name="electric">электро</string>
     <string name="hybrid">гибрид</string>
+    <string name="fill_random">Fill random</string>
+    <string name="add_new">Add new</string>
+
+    <string-array name="fuelTypes">
+        <item>Все</item>
+        <item>Бензин</item>
+        <item>Дизель</item>
+        <item>Гибрид</item>
+        <item>Электро</item>
+    </string-array>
 </resources>
